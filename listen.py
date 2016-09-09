@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from jarvis import Jarvis
+import jarvis
 
 import logging
 import speech_recognition as sr
@@ -25,7 +25,7 @@ def listen_audio():
 
             try:
                 result = r.recognize_google(audio, key=GOOGLE_SPEECH_RECOGNITION_API_KEY, language="en-in")
-                Jarvis.handle_action(result)
+                jarvis.Jarvis.handle_action(result)
             except sr.UnknownValueError:
                 logger.debug("Google Speech Recognition could not understand audio")
             except sr.RequestError as e:
