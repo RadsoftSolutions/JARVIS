@@ -53,6 +53,16 @@ def get_boss_name():
     os.system("say " + speak_message)
 
 
+def get_what_doing_speech():
+    message_list = ["Nothing much Sir, I was just debugging myself", "Nothing much Sir, just waiting for your command",
+                    "Always free for you sir", "I am at your service Sir", "I was watching a movie",
+                    "I am having this delicious chocolate ice cream, do you like ice creams sir?"]
+
+    speak_message = get_random_from_list(message_list)
+    print("JARVIS: " + speak_message)
+    os.system("say " + speak_message)
+
+
 def open_facebook_in_browser():
     import webbrowser
 

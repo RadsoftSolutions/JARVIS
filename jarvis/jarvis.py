@@ -18,6 +18,7 @@ class Jarvis(object):
     WHO_IS_MASTER_COGNATES = ["jarvis who is your boss", "jarvis who is your master", "who is your master",
                               "who is your boss"]
     FACEBOOK_COGNATES = ["open my facebook", "give me facebook updates", "give me my facebook updates", "open facebook"]
+    WHAT_DOING_COGNATES = ["what are you doing"]
 
     # @classmethod
     # def is_actionable_command(cls, command):
@@ -44,6 +45,8 @@ class Jarvis(object):
             speak_message = random.choice(["I agree", "Absolutely", "No doubt Sir"])
         elif command in cls.FACEBOOK_COGNATES:
             SystemCommands.open_facebook_in_browser()
+        elif command in cls.WHAT_DOING_COGNATES:
+            SystemCommands.get_what_doing_speech()
         elif command in cls.STOP_LISTENING_COGNATES:
             speak_message = random.choice(["Sure Sir", "Okay Sir", "Absolutely"])
             print("JARVIS: " + speak_message)
