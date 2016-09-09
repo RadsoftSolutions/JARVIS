@@ -2,6 +2,9 @@ import logging
 import os
 import time
 import random
+import requests
+import json
+import webbrowser
 
 logger = logging.getLogger(__name__)
 
@@ -64,8 +67,6 @@ def get_what_doing_speech():
 
 
 def open_facebook_in_browser():
-    import webbrowser
-
     message_list = ["Sure sir", "Are you sure that you are wasting any time?"]
 
     speak_message = get_random_from_list(message_list)
@@ -77,3 +78,15 @@ def open_facebook_in_browser():
     # open a public URL, in this case, the webbrowser docs
     url = "https://www.facebook.com"
     webbrowser.open(url, new=new)
+
+
+def get_current_location():
+    r = requests.get("http://freegeoip.net/json")
+    j = json.loads(r.text)
+
+    message_list = ["Sir, I could only get the city name, you are in " + j["city"] + " right now.",
+                    "You are in " + j["city"] + " Sir."]
+
+    speak_message = get_random_from_list(message_list)
+    print("JARVIS: " + speak_message)
+    os.system("say " + speak_message)
