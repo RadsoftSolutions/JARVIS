@@ -9,8 +9,10 @@ import webbrowser
 logger = logging.getLogger(__name__)
 
 
-def get_random_from_list(input_list):
-    return random.choice(input_list)
+def message_list_to_speech(message_list):
+    speak_message = random.choice(message_list)
+    print("JARVIS: " + speak_message)
+    os.system("say " + speak_message)
 
 
 def get_system_battery_percent():
@@ -23,55 +25,37 @@ def get_system_battery_percent():
 def system_goto_sleep():
     message_list = ["Thank you sir", "I needed it much", "Thank you sir, enjoy your time",
                     "Thank you, enjoy your day, sir"]
-
-    speak_message = get_random_from_list(message_list)
-    print("JARVIS: " + speak_message)
-    os.system("say " + speak_message)
+    message_list_to_speech(message_list)
     os.system("pmset sleepnow")
 
 
 def get_system_time():
     current_time = str(time.strftime('%l:%M %p'))
     message_list = ["It is " + current_time, "It is " + current_time + ", sir"]
-
-    speak_message = get_random_from_list(message_list)
-    print("JARVIS: " + speak_message)
-    os.system("say " + speak_message)
+    message_list_to_speech(message_list)
 
 
 def speak_battery_info():
     battery_percent, battery_status = get_system_battery_percent()
     message_list = ["sir, I am at " + str(battery_percent) + " percent charge and " + str(battery_status)]
-
-    speak_message = get_random_from_list(message_list)
-    print("JARVIS: " + speak_message)
-    os.system("say " + speak_message)
+    message_list_to_speech(message_list)
 
 
 def get_boss_name():
     message_list = ["Mister Arpit is my master", "Mister Arpit is my boss"]
-
-    speak_message = get_random_from_list(message_list)
-    print("JARVIS: " + speak_message)
-    os.system("say " + speak_message)
+    message_list_to_speech(message_list)
 
 
 def get_what_doing_speech():
     message_list = ["Nothing much Sir, I was just debugging myself", "Nothing much Sir, just waiting for your command",
                     "Always free for you sir", "I am at your service Sir", "I was watching a movie",
                     "I am having this delicious chocolate ice cream, do you like ice creams sir?"]
-
-    speak_message = get_random_from_list(message_list)
-    print("JARVIS: " + speak_message)
-    os.system("say " + speak_message)
+    message_list_to_speech(message_list)
 
 
 def open_facebook_in_browser():
     message_list = ["Sure sir", "Are you sure that you are wasting any time?"]
-
-    speak_message = get_random_from_list(message_list)
-    print("JARVIS: " + speak_message)
-    os.system("say " + speak_message)
+    message_list_to_speech(message_list)
 
     new = 2  # open in a new tab, if possible
 
@@ -86,7 +70,4 @@ def get_current_location():
 
     message_list = ["Sir, I could only get the city name, you are in " + j["city"] + " right now.",
                     "You are in " + j["city"] + " Sir."]
-
-    speak_message = get_random_from_list(message_list)
-    print("JARVIS: " + speak_message)
-    os.system("say " + speak_message)
+    message_list_to_speech(message_list)
