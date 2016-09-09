@@ -2,7 +2,6 @@ import logging
 import os
 import SystemCommands
 import random
-import re
 
 logger = logging.getLogger(__name__)
 
