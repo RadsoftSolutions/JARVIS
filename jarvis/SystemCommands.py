@@ -15,6 +15,11 @@ def message_list_to_speech(message_list):
     os.system("say " + speak_message)
 
 
+def open_browser(webpage_url):
+    # open a public URL, in this case, the webbrowser docs
+    webbrowser.open(webpage_url)
+
+
 def get_system_battery_percent():
     battery_percent = os.popen('pmset -g batt | egrep "([0-9]+\%).*" -o --colour=auto | cut -f1 -d\';\'').read().strip()
     battery_status = os.popen('pmset -g batt | egrep "([0-9]+\%).*" -o --colour=auto | cut -f2 -d\';\'').read().strip()
@@ -56,11 +61,7 @@ def get_what_doing_speech():
 def open_facebook_in_browser():
     message_list = ["Sure sir", "Are you sure that you are wasting any time?"]
     message_list_to_speech(message_list)
-
-    new = 2  # open in a new tab, if possible
-    # open a public URL, in this case, the webbrowser docs
-    url = "https://www.facebook.com"
-    webbrowser.open(url, new=new)
+    open_browser("https://www.facebook.com")
 
 
 def get_current_location():
@@ -78,7 +79,4 @@ def open_map(place_name):
                     "Sir, I am opening Google Maps for you, so that you can see where " + str(place_name) + " is."]
 
     message_list_to_speech(message_list)
-    new = 2  # open in a new tab, if possible
-    # open a public URL, in this case, the webbrowser docs
-    url = "https://www.google.nl/maps/place/" + str(place_name)
-    webbrowser.open(url, new=new)
+    open_browser("https://www.google.nl/maps/place/" + str(place_name))
