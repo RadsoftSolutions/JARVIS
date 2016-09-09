@@ -58,7 +58,6 @@ def open_facebook_in_browser():
     message_list_to_speech(message_list)
 
     new = 2  # open in a new tab, if possible
-
     # open a public URL, in this case, the webbrowser docs
     url = "https://www.facebook.com"
     webbrowser.open(url, new=new)
@@ -71,3 +70,15 @@ def get_current_location():
     message_list = ["Sir, I could only get the city name, you are in " + j["city"] + " right now.",
                     "You are in " + j["city"] + " Sir."]
     message_list_to_speech(message_list)
+
+
+def open_map(place_name):
+    message_list = ["Hold on Sir! While I open it for you. Here is " + str(place_name) + ".",
+                    "Hold on Sir, I will show you where " + str(place_name) + " is.",
+                    "Sir, I am opening Google Maps for you, so that you can see where " + str(place_name) + " is."]
+
+    message_list_to_speech(message_list)
+    new = 2  # open in a new tab, if possible
+    # open a public URL, in this case, the webbrowser docs
+    url = "https://www.google.nl/maps/place/" + str(place_name)
+    webbrowser.open(url, new=new)
