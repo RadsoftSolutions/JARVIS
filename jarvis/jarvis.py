@@ -21,6 +21,7 @@ class Jarvis(object):
     FACEBOOK_COGNATES = ["open my facebook", "give me facebook updates", "give me my facebook updates", "open facebook"]
     WHAT_DOING_COGNATES = ["what are you doing"]
     WHERE_AM_I_COGNATES = ["where am i right now", "what is this place", "where are we"]
+    POWER_STATUS_COGNATES = ["what is your power status"]
 
     # @classmethod
     # def is_actionable_command(cls, command):
@@ -51,6 +52,8 @@ class Jarvis(object):
             SystemCommands.get_what_doing_speech()
         elif command in cls.WHERE_AM_I_COGNATES:
             SystemCommands.get_current_location()
+        elif command in cls.POWER_STATUS_COGNATES:
+            SystemCommands.speak_battery_info()
         elif "where is" in command:
             speech_data = command.split("where is")
             SystemCommands.open_map(str(speech_data[1]).strip())
