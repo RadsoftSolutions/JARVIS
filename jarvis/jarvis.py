@@ -10,7 +10,8 @@ class Jarvis(object):
     # Built-in words
     LISTENING_COGNATES = ["jarvis", "javed", "gervais", "jarvis wake up", "wake up jarvis", "okay jarvis", "ok jarvis"]
     SLEEP_COGNATES = ["go to sleep", "jarvis go to sleep", "jarvis sleep now", "sleep now"]
-    DATETIME_COGNATES = ["what is the time right now", "and time", "tell me about time", "i lost my watch"]
+    DATETIME_COGNATES = ["what is the time right now", "and time", "tell me about time", "i lost my watch",
+                         "what time it is"]
     STOP_LISTENING_COGNATES = ["go away", "stop listening", "take rest", "take rest now"]
     AGREE_COGNATES = ["do you think deepika is mad", "do you think deepika is crazy", "i think my wife is beautiful",
                       "i think my voice is beautiful", "do you think my voice is beautiful",
