@@ -31,7 +31,7 @@ class Jarvis(object):
         print("Arpit: " + command)
 
         if command in cls.LISTENING_COGNATES:
-            speak_message = random.choice(["Yes Sir?", "I am here, Sir", "I am listening Sir", "Oh hello Sir"])
+            speak_message = random.choice(["Yes Sir?", "I am here Sir", "I am listening Sir", "Oh hello Sir"])
         elif command in cls.SLEEP_COGNATES:
             # System now goes to sleep mode
             SystemCommands.system_goto_sleep()

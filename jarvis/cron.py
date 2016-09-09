@@ -6,7 +6,7 @@ from SystemCommands import get_system_battery_percent
 
 def check_battery_percent():
     message_list = ["I am running critically low on power", "please find me a power source",
-                    "Have you brought your charger today", "Please see if you have my charger nearby"]
+                    "Have you brought your charger today?", "Please see if you have my charger nearby"]
     battery_percent, battery_status = get_system_battery_percent()
     if battery_percent <= 15 and battery_status is 'discharging':
         speak_message = get_random_from_list(message_list)
