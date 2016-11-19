@@ -22,7 +22,7 @@ class Jarvis(object):
     FACEBOOK_COGNATES = ["open my facebook", "give me facebook updates", "give me my facebook updates", "open facebook"]
     WHAT_DOING_COGNATES = ["what are you doing"]
     WHERE_AM_I_COGNATES = ["where am i right now", "what is this place", "where are we"]
-    POWER_STATUS_COGNATES = ["what is your power status"]
+    POWER_STATUS_COGNATES = ["what is your power status", "what is your battery status", "are you charged", "is the charger working"]
 
     # @classmethod
     # def is_actionable_command(cls, command):
