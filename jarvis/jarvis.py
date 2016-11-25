@@ -10,7 +10,8 @@ logger = logging.getLogger(__name__)
 class Jarvis(object):
     # Built-in words
     LISTENING_COGNATES = ["jarvis", "javed", "gervais", "jarvis wake up", "wake up jarvis", "okay jarvis",
-                          "ok jarvis", "jarvis are you there", "you there jarvis", "are you there jarvis"]
+                          "ok jarvis", "jarvis are you there", "you there jarvis", "are you there jarvis",
+                          "are you there"]
     SLEEP_COGNATES = ["go to sleep", "jarvis go to sleep", "jarvis sleep now", "sleep now"]
     DATETIME_COGNATES = ["what is the time right now", "and time", "tell me about time", "i lost my watch",
                          "what time it is"]

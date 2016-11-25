@@ -1,5 +1,5 @@
 *.pyc
 .idea/*
 .DS_Store
-
+venv/
 jarvis/.DS_Store
