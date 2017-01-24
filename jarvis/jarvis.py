@@ -47,7 +47,11 @@ class Jarvis(object):
         # Use lowercase for processing.
         command = command.lower()
 
-        is_exists, command = self.remove_listening_cognate(command)
+        if command == "jarvis":
+            is_exists = True
+        else:
+            is_exists, command = self.remove_listening_cognate(command)
+
         if is_exists:
             print("User: " + command)
 
