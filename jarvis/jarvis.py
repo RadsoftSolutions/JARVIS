@@ -1,10 +1,15 @@
 import logging
 import os
 import random
+import warnings
+
 from nltk import tokenize
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 import SystemCommands
+
+# to ignore warning being displayed on Terminal
+warnings.filterwarnings('ignore')
 
 logger = logging.getLogger(__name__)
 
