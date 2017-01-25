@@ -1,6 +1,8 @@
 import logging
 import os
 import random
+from nltk import tokenize
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 import SystemCommands
 
@@ -27,10 +29,6 @@ class Jarvis(object):
     POWER_STATUS_COGNATES = ["what is your power status", "what is your battery status", "are you charged",
                              "is the charger working"]
 
-    # @classmethod
-    # def is_actionable_command(self, command):
-    #     return any(cognate in command for cognate in self.LISTENING_COGNATES)
-
     @classmethod
     def remove_listening_cognate(self, command):
         is_exists = False
@@ -40,6 +38,22 @@ class Jarvis(object):
                 command = command.replace(wrd, " ")
                 command = command.replace("  ", " ")
         return is_exists, command.strip()
+
+    @classmethod
+    def analyse_sentiments(self,command):
+        lines_list = tokenize.sent_tokenize(command)
+        sid = SentimentIntensityAnalyzer()
+
+        for sentence in lines_list:
+            scores = sid.polarity_scores(sentence)
+            pos_score = scores["pos"]
+            neg_score = scores["neg"]
+            if pos_score > neg_score:
+                return 'positive'
+            elif neg_score > pos_score:
+                return 'negative'
+            elif pos_score == neg_score:
+                return 'nuetral'
 
     @classmethod
     def handle_action(self, command, **kwargs):
