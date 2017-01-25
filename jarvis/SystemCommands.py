@@ -5,6 +5,7 @@ import random
 import requests
 import json
 import webbrowser
+from jarvis.jarvis import Jarvis
 
 logger = logging.getLogger(__name__)
 
@@ -70,6 +71,21 @@ def get_current_location():
 
     message_list = ["Sir, I could only get the city name, you are in " + j["city"] + " right now.",
                     "You are in " + j["city"] + " Sir."]
+    message_list_to_speech(message_list)
+
+
+def get_sentiment_response(command):
+    user_sentiment = Jarvis.analyse_sentiments(command)
+    if user_sentiment == 'positive':
+        message_list = [
+            "I am glad to hear that you are happy with my service. But at the moment I am not trained to do what you are expecting, but I will let Mr. Arpit know and he will definitely do something about it."]
+    elif user_sentiment == "negative":
+        message_list = [
+            "I am so sorry that you are not very happy with it. But at the moment there is only so much I can do. Mr. Arpit is still working on me."]
+    else:
+        message_list = [
+            "I am not able to process your command at the moment. As I am still under development phase. I will ask Mr. Arpit to train me on it."]
+
     message_list_to_speech(message_list)
 
 
