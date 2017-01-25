@@ -1,18 +1,17 @@
 #!/usr/bin/env python
 
-from jarvis import Jarvis
+import jarvis
 
 import logging
 import speech_recognition as sr
 
 logger = logging.getLogger(__name__)
 
-# for testing purposes, we're just using the default API key
+# for testing purposes, I am just using the default API key
 GOOGLE_SPEECH_RECOGNITION_API_KEY = None
 
 
-def run_transcription_loop():
-    # Most of this code taken from https://github.com/Uberi/speech_recognition/blob/master/examples/microphone_recognition.py.
+def listen_audio():
     r = sr.Recognizer()
     with sr.Microphone() as source:
 
@@ -26,7 +25,7 @@ def run_transcription_loop():
 
             try:
                 result = r.recognize_google(audio, key=GOOGLE_SPEECH_RECOGNITION_API_KEY, language="en-in")
-                Jarvis.handle_action(result)
+                jarvis.Jarvis.handle_action(result)
             except sr.UnknownValueError:
                 logger.debug("Google Speech Recognition could not understand audio")
             except sr.RequestError as e:
@@ -41,7 +40,7 @@ def main():
     FORMAT = '%(asctime)s [%(levelname)s] %(message)s'
     logging.basicConfig(format=FORMAT, level=logging.DEBUG)
 
-    run_transcription_loop()
+    listen_audio()
 
 
 if __name__ == '__main__':
