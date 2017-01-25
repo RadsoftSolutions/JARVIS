@@ -5,5 +5,3 @@ echo "Activating Virtual Environment"
 
 echo "Initializing JARVIS"
 python /Applications/XAMPP/htdocs/work/svn/JARVIS/listen.py
-
-echo ""
