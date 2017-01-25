@@ -119,6 +119,6 @@ class Jarvis(object):
         else:
             SystemCommands.get_sentiment_response(command)
 
-            if speak_message is not None:
-                print("JARVIS: " + speak_message)
-                os.system("say " + speak_message)
+        if speak_message is not None:
+            print("JARVIS: " + speak_message)
+            os.system("say " + speak_message)
