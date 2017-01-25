@@ -2,10 +2,12 @@ import logging
 import os
 import time
 import random
-import requests
 import json
 import webbrowser
-from jarvis.jarvis import Jarvis
+
+import requests
+from nltk import tokenize
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 logger = logging.getLogger(__name__)
 
@@ -22,14 +24,17 @@ def open_browser(webpage_url):
 
 
 def get_system_battery_percent():
-    battery_percent = os.popen('pmset -g batt | egrep "([0-9]+\%).*" -o --colour=auto | cut -f1 -d\';\'').read().strip()
-    battery_status = os.popen('pmset -g batt | egrep "([0-9]+\%).*" -o --colour=auto | cut -f2 -d\';\'').read().strip()
+    battery_percent = os.popen(
+        'pmset -g batt | egrep "([0-9]+\%).*" -o --colour=auto | cut -f1 -d\';\'').read().strip()
+    battery_status = os.popen(
+        'pmset -g batt | egrep "([0-9]+\%).*" -o --colour=auto | cut -f2 -d\';\'').read().strip()
 
     return int(battery_percent.split('%')[0]), battery_status
 
 
 def system_goto_sleep():
-    message_list = ["Thank you sir", "I needed it much", "Thank you sir, enjoy your time",
+    message_list = ["Thank you sir", "I needed it much",
+                    "Thank you sir, enjoy your time",
                     "Thank you, enjoy your day, sir"]
     message_list_to_speech(message_list)
     os.system("pmset sleepnow")
@@ -43,7 +48,9 @@ def get_system_time():
 
 def speak_battery_info():
     battery_percent, battery_status = get_system_battery_percent()
-    message_list = ["sir, I am at " + str(battery_percent) + " percent charge and " + str(battery_status)]
+    message_list = [
+        "sir, I am at " + str(battery_percent) + " percent charge and " + str(
+            battery_status)]
     message_list_to_speech(message_list)
 
 
@@ -53,8 +60,10 @@ def get_boss_name():
 
 
 def get_what_doing_speech():
-    message_list = ["Nothing much Sir, I was just debugging myself", "Nothing much Sir, just waiting for your command",
-                    "Always free for you sir", "I am at your service Sir", "I was watching a movie",
+    message_list = ["Nothing much Sir, I was just debugging myself",
+                    "Nothing much Sir, just waiting for your command",
+                    "Always free for you sir", "I am at your service Sir",
+                    "I was watching a movie",
                     "I am having this delicious chocolate ice cream, do you like ice creams sir?"]
     message_list_to_speech(message_list)
 
@@ -69,13 +78,30 @@ def get_current_location():
     r = requests.get("http://freegeoip.net/json")
     j = json.loads(r.text)
 
-    message_list = ["Sir, I could only get the city name, you are in " + j["city"] + " right now.",
+    message_list = ["Sir, I could only get the city name, you are in " + j[
+        "city"] + " right now.",
                     "You are in " + j["city"] + " Sir."]
     message_list_to_speech(message_list)
 
 
+def analyse_sentiments(command):
+    lines_list = tokenize.sent_tokenize(command)
+    sid = SentimentIntensityAnalyzer()
+
+    for sentence in lines_list:
+        scores = sid.polarity_scores(sentence)
+        pos_score = scores["pos"]
+        neg_score = scores["neg"]
+        if pos_score > neg_score:
+            return 'positive'
+        elif neg_score > pos_score:
+            return 'negative'
+        elif pos_score == neg_score:
+            return 'nuetral'
+
+
 def get_sentiment_response(command):
-    user_sentiment = Jarvis.analyse_sentiments(command)
+    user_sentiment = analyse_sentiments(command)
     if user_sentiment == 'positive':
         message_list = [
             "I am glad to hear that you are happy with my service. But at the moment I am not trained to do what you are expecting, but I will let Mr. Arpit know and he will definitely do something about it."]
@@ -90,9 +116,12 @@ def get_sentiment_response(command):
 
 
 def open_map(place_name):
-    message_list = ["Hold on Sir! While I open it for you. Here is " + str(place_name) + ".",
-                    "Hold on Sir, I will show you where " + str(place_name) + " is.",
-                    "Sir, I am opening Google Maps for you, so that you can see where " + str(place_name) + " is."]
+    message_list = ["Hold on Sir! While I open it for you. Here is " + str(
+        place_name) + ".",
+                    "Hold on Sir, I will show you where " + str(
+                        place_name) + " is.",
+                    "Sir, I am opening Google Maps for you, so that you can see where " + str(
+                        place_name) + " is."]
 
     message_list_to_speech(message_list)
     open_browser("https://www.google.nl/maps/place/" + str(place_name))

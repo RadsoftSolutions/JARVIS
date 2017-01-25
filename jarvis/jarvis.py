@@ -3,10 +3,8 @@ import os
 import random
 import warnings
 
-from nltk import tokenize
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-
 import SystemCommands
+
 
 # to ignore warning being displayed on Terminal
 warnings.filterwarnings('ignore')
@@ -56,22 +54,6 @@ class Jarvis(object):
                 command = command.replace(wrd, " ")
                 command = command.replace("  ", " ")
         return is_exists, command.strip()
-
-    @classmethod
-    def analyse_sentiments(self, command):
-        lines_list = tokenize.sent_tokenize(command)
-        sid = SentimentIntensityAnalyzer()
-
-        for sentence in lines_list:
-            scores = sid.polarity_scores(sentence)
-            pos_score = scores["pos"]
-            neg_score = scores["neg"]
-            if pos_score > neg_score:
-                return 'positive'
-            elif neg_score > pos_score:
-                return 'negative'
-            elif pos_score == neg_score:
-                return 'nuetral'
 
     @classmethod
     def handle_action(self, command, **kwargs):
