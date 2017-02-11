@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def message_list_to_speech(message_list):
     speak_message = random.choice(message_list)
-    print("JARVIS: " + speak_message)
+    logger.debug("JARVIS: " + speak_message)
     os.system("say " + speak_message)
 
 
@@ -55,7 +55,7 @@ def speak_battery_info():
 
 
 def get_boss_name():
-    message_list = ["Mister Arpit is my master", "Mister Arpit is my boss"]
+    message_list = ["Mister Arpit is the who commands me", "Mister Arpit is my boss"]
     message_list_to_speech(message_list)
 
 
