@@ -63,7 +63,7 @@ def get_what_doing_speech():
     message_list = ["Nothing much Sir, I was just debugging myself",
                     "Nothing much Sir, just waiting for your command",
                     "Always free for you sir", "I am at your service Sir",
-                    "I was watching a movie",
+                    "I was just processing some data for you, Sir",
                     "I am having this delicious chocolate ice cream, do you like ice creams sir?"]
     message_list_to_speech(message_list)
 

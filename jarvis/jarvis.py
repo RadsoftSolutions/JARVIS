@@ -3,7 +3,7 @@ import os
 import random
 import warnings
 
-import SystemCommands
+from jarvis import SystemCommands
 
 
 # to ignore warning being displayed on Terminal
@@ -53,21 +53,21 @@ class Jarvis(object):
                 is_exists = True
                 command = command.replace(wrd, " ")
                 command = command.replace("  ", " ")
-        return is_exists, command.strip()
+
+        command = command.strip()
+        if command == "":
+            command = "jarvis"
+
+        return is_exists, command
 
     @classmethod
     def handle_action(self, command, **kwargs):
         speak_message = None
         # Use lowercase for processing.
         command = command.lower()
-
-        if command == "jarvis":
-            is_exists = True
-        else:
-            is_exists, command = self.remove_listening_cognate(command)
-
+        is_exists, command = self.remove_listening_cognate(command)
         if is_exists:
-            print("User: " + command)
+            logger.debug("User: " + command)
 
             if command in self.LISTENING_COGNATES:
                 speak_message = random.choice(
@@ -98,7 +98,7 @@ class Jarvis(object):
             elif command in self.STOP_LISTENING_COGNATES:
                 speak_message = random.choice(
                     ["Sure Sir", "Okay Sir", "Absolutely"])
-                print("JARVIS: " + speak_message)
+                logger.debug("JARVIS: " + speak_message)
                 os.system("say " + speak_message)
                 exit()
             else:
@@ -107,5 +107,5 @@ class Jarvis(object):
             SystemCommands.get_sentiment_response(command)
 
         if speak_message is not None:
-            print("JARVIS: " + speak_message)
+            logger.debug("JARVIS: " + speak_message)
             os.system("say " + speak_message)
