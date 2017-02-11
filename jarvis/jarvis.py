@@ -3,7 +3,7 @@ import os
 import random
 import warnings
 
-from jarvis import SystemCommands
+import SystemCommands
 
 
 # to ignore warning being displayed on Terminal
